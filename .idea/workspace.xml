@@ -11,7 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="670fcd98-8a4b-482f-833f-67a7f8ab4d87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/play.js" beforeDir="false" afterPath="$PROJECT_DIR$/play.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +165,10 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="244" key="GridCell.Tab.3.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777246710" />
+    <state x="-1123" y="222" key="RollbackChangesDialog" timestamp="1647777983095">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1123" y="222" key="RollbackChangesDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777983095" />
     <state x="-1368" y="252" key="Vcs.Push.Dialog.v2" timestamp="1647777306526">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>

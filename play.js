@@ -46,7 +46,7 @@ const play = async () => {
         {
             console.log('Player' + (i+1) + 'wins');
             playerScores.shift();
-            continue;
+            break;
 
         }
     }
