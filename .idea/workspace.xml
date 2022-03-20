@@ -101,22 +101,22 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1180" y="286" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647695958154" />
-    <state width="1899" height="391" key="GridCell.Tab.0.bottom" timestamp="1647777246718">
+    <state width="1899" height="882" key="GridCell.Tab.0.bottom" timestamp="1647778262924">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="391" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777246718" />
-    <state width="1899" height="391" key="GridCell.Tab.0.center" timestamp="1647777246718">
+    <state width="1899" height="882" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647778262924" />
+    <state width="1899" height="882" key="GridCell.Tab.0.center" timestamp="1647778262924">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="391" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777246718" />
-    <state width="1899" height="391" key="GridCell.Tab.0.left" timestamp="1647777246718">
+    <state width="1899" height="882" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647778262924" />
+    <state width="1899" height="882" key="GridCell.Tab.0.left" timestamp="1647778262923">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="391" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777246718" />
-    <state width="1899" height="391" key="GridCell.Tab.0.right" timestamp="1647777246718">
+    <state width="1899" height="882" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647778262923" />
+    <state width="1899" height="882" key="GridCell.Tab.0.right" timestamp="1647778262924">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="391" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777246718" />
+    <state width="1899" height="882" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647778262924" />
     <state width="1899" height="244" key="GridCell.Tab.1.bottom" timestamp="1647777246710">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
@@ -173,6 +173,10 @@
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1368" y="252" key="Vcs.Push.Dialog.v2/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647777306526" />
+    <state x="-1828" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1647778347229">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1828" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1647778347229" />
     <state x="-1408" y="248" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1647761794889">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
@@ -183,7 +187,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/play.js</url>
-          <line>81</line>
+          <line>80</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>

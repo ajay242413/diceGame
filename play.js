@@ -45,7 +45,6 @@ const play = async () => {
         if(playerScores[i] >= parseInt(MaxPoints))
         {
             console.log('Player' + (i+1) + 'wins');
-            playerScores.shift();
             break;
 
         }
