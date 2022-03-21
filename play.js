@@ -25,14 +25,11 @@ winPoint = () => {
     })
 }
 
-const play = async () => {
-    let result;
-    for(let i = 0; i < numberOfPlayers; i++){
-
+const play = async (i) => {
+    let result = 0;
             result = await rollDice(i + 1);
-            // give 2nd chance of player gets 6 and he is not yet won
-            if( result === 6 && (!playerScores[i] || playerScores[i] + result < parseInt(MaxPoints))){
-                result += await rollDice(i + 1);
+            if( result === 6){
+                await play(i);
             }
             if(playerScores[i]){
                 playerScores[i] += result;
@@ -41,15 +38,6 @@ const play = async () => {
             }
 
             printRank();
-
-        if(playerScores[i] >= parseInt(MaxPoints))
-        {
-            console.log('Player' + (i+1) + 'wins');
-            break;
-
-        }
-    }
-
 }
 
 function printRank(){
@@ -79,7 +67,15 @@ const main = async () => {
     await players()
     await winPoint()
     while (checkIfAnyPlayerHasWon()){
-        await play()
+        for(let i = 0; i < numberOfPlayers; i++) {
+            await play(i);
+            if(playerScores[i] >= parseInt(MaxPoints))
+            {
+                console.log('Player' + (i+1) + 'wins');
+                break;
+
+            }
+        }
     }
 
     rl.close()
