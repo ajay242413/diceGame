@@ -5,7 +5,7 @@ const rl = require('readline').createInterface({
     output: process.stdout
 })
 
-let numberOfPlayers, MaxPoints, playerScores =[];
+let numberOfPlayers, MaxPoints, playerScores =[], playersLastScores =[];
 
 players = () => {
     return new Promise((resolve, reject) => {
@@ -25,21 +25,72 @@ winPoint = () => {
     })
 }
 
+/**
+ *  Each plyer will roll dice here
+ *  and their score will be updated in PlayerScores array
+ * @param i
+ * @returns {Promise<void>}
+ */
 const play = async (i) => {
     let result = 0;
-            result = await rollDice(i + 1);
-            if( result === 6){
-                await play(i);
-            }
-            if(playerScores[i]){
-                playerScores[i] += result;
-            } else {
-                playerScores[i] = result;
-            }
-
-            printRank();
+    if(!checkIfPlayerHasToBePenalized(i))
+    {
+        result = await rollDice(i + 1);
+        if( result === 6){
+            await play(i);
+        }
+        if(playerScores[i]){
+            playerScores[i] += result;
+        } else {
+            playerScores[i] = result;
+        }
+        storeLastScores(i, result);
+        printRank();
+    }
 }
 
+/**
+ * check if player has penalty
+ * @param i
+ * @returns {boolean}
+ */
+function checkIfPlayerHasToBePenalized(i){
+    if(!playersLastScores[i] || playersLastScores[i].length <= 1){
+        return false
+    } else {
+        if(playersLastScores[i][0] === playersLastScores[i][1] && playersLastScores[i][1] === 1){
+            console.log('player' + (i +1) + 'is penalized since he got consecutive 1s');
+            return true
+
+        }
+    }
+
+}
+
+/**
+ * store last 2 scores for each player
+ * @param player
+ * @param score
+ */
+function storeLastScores(player, score){
+    var individualScore = [];
+    if(!playersLastScores[player])
+    {
+
+        playersLastScores.push([score]);
+    } else if (playersLastScores[player].length <= 1){
+
+        playersLastScores[player].push(score);
+    } else {
+        playersLastScores[player].shift();
+        playersLastScores[player].push(score);
+    }
+
+}
+
+/**
+ * Prints Players score and rank
+ */
 function printRank(){
     let rankTable = [];
     let n = playerScores.length;
@@ -62,10 +113,13 @@ function printRank(){
     console.table(rankTable)
 }
 
-
+/**
+ * start of the application
+ * @returns {Promise<void>}
+ */
 const main = async () => {
-    await players()
-    await winPoint()
+    await players();
+    await winPoint();
     while (checkIfAnyPlayerHasWon()){
         for(let i = 0; i < numberOfPlayers; i++) {
             await play(i);
@@ -73,14 +127,16 @@ const main = async () => {
             {
                 console.log('Player' + (i+1) + 'wins');
                 break;
-
             }
         }
     }
-
     rl.close()
 }
 
+/**
+ * check if any player has won the game
+ * @returns {boolean}
+ */
 function checkIfAnyPlayerHasWon(){
     let array = playerScores.slice(0),
         n = playerScores.length;
@@ -89,6 +145,9 @@ function checkIfAnyPlayerHasWon(){
 
 }
 
+/*
+function to roll dice : which generates random number form 1-6
+ */
 rollDice = (player) => {
     return new Promise((resolve, reject) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
