@@ -5,13 +5,19 @@ const rl = require('readline').createInterface({
     output: process.stdout
 })
 
-let numberOfPlayers, MaxPoints, playerScores =[], playersLastScores =[];
+let numberOfPlayers, MaxPoints, playerScores =[], playersLastScores =[], flag = false;
 
 players = () => {
     return new Promise((resolve, reject) => {
         rl.question(`Enter Number Of players :`, n => {
-            numberOfPlayers = n;
-            resolve()
+
+            if (Number.isInteger(parseInt(n))) {
+                numberOfPlayers = n;
+                resolve()
+            } else {
+                console.log('Invalid input, please enter value in numbers')
+                resolve(players());
+            }
         })
     })
 }
@@ -19,8 +25,14 @@ players = () => {
 winPoint = () => {
     return new Promise((resolve, reject) => {
         rl.question(`Enter Winning point :`, n => {
-            MaxPoints = n;
-            resolve()
+            if (Number.isInteger(parseInt(n))) {
+                MaxPoints = n;
+                resolve()
+            } else {
+                console.log('Invalid input, please enter value in numbers')
+                resolve(winPoint());
+            }
+
         })
     })
 }
@@ -158,7 +170,7 @@ rollDice = (player) => {
                 console.log(res);
             } else {
                 console.log(`wrong input`)
-                reject();
+                resolve(rollDice(player));
             }
 
 
