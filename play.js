@@ -122,15 +122,12 @@ function printRank(player){
     sortedRec =  playerScores.slice(0);
 
     sort.quickSort(sortedRec, 0, n-1);
-
     for(let i = 0; i < playerScores.length; i++){
         if(playersRank.indexOf(i) !== -1){
             rank = playersRank.indexOf(i) + 1;
         }else {
-            rank = n - sortedRec.indexOf(playerScores[i]);
-            if(rankTable[i -1] && rank === rankTable[i -1].rank){
-                rank = rank -1
-            }
+            rank = (n - 1) - sortedRec.lastIndexOf(playerScores[i]) + 1;
+
         }
 
         rankTable.push( {
@@ -199,7 +196,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = 6;
+                res = Math.floor(Math.random() * 6) + 1;
                 resolve(res);
                 console.log(res);
             } else {
