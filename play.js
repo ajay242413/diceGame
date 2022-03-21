@@ -5,7 +5,7 @@ const rl = require('readline').createInterface({
     output: process.stdout
 })
 
-let numberOfPlayers, MaxPoints, playerScores =[], playersLastScores =[], flag = false;
+let numberOfPlayers, MaxPoints, playerScores =[], playersLastScores =[], flag = false, dice, playersRank = [];
 
 players = () => {
     return new Promise((resolve, reject) => {
@@ -44,20 +44,17 @@ winPoint = () => {
  * @returns {Promise<void>}
  */
 const play = async (i) => {
-    let result = 0;
-    if(!checkIfPlayerHasToBePenalized(i))
+
+    if(playerScores[i] >= parseInt(MaxPoints))
     {
-        result = await rollDice(i + 1);
-        if( result === 6){
+        console.log('Player' + (i+1) + 'wins');
+
+    } else{
+        dice =  await rollDice(i + 1);
+        printRank(i);
+        if(dice === 6){
             await play(i);
         }
-        if(playerScores[i]){
-            playerScores[i] += result;
-        } else {
-            playerScores[i] = result;
-        }
-        storeLastScores(i, result);
-        printRank();
     }
 }
 
@@ -102,17 +99,40 @@ function storeLastScores(player, score){
 
 /**
  * Prints Players score and rank
+ * @param player
  */
-function printRank(){
-    let rankTable = [];
-    let n = playerScores.length;
-    let sortedRec =  playerScores.slice(0);
+function printRank(player){
+    let rankTable = [], n, sortedRec;
+
+
+
+    if (playerScores[player]) {
+        playerScores[player] += dice;
+    } else {
+        playerScores[player] = dice;
+    }
+    storeLastScores(player, dice);
+
+    if (checkIfPlayerHasWon(player)){
+        playersRank.push(player);
+    }
+    let rank;
+
+    n = playerScores.length;
+    sortedRec =  playerScores.slice(0);
+
     sort.quickSort(sortedRec, 0, n-1);
 
     for(let i = 0; i < playerScores.length; i++){
-        let rank = n - sortedRec.findIndex((value) => {
-            return value >= playerScores[i]
-        });
+        if(playersRank.indexOf(i) !== -1){
+            rank = playersRank.indexOf(i) + 1;
+        }else {
+            rank = n - sortedRec.indexOf(playerScores[i]);
+            if(rankTable[i -1] && rank === rankTable[i -1].rank){
+                rank = rank -1
+            }
+        }
+
         rankTable.push( {
             Player: 'Player' + (i + 1),
             score: playerScores[i],
@@ -130,30 +150,44 @@ function printRank(){
  * @returns {Promise<void>}
  */
 const main = async () => {
+
     await players();
     await winPoint();
-    while (checkIfAnyPlayerHasWon()){
-        for(let i = 0; i < numberOfPlayers; i++) {
-            await play(i);
-            if(playerScores[i] >= parseInt(MaxPoints))
-            {
-                console.log('Player' + (i+1) + 'wins');
-                break;
+    while (checkIfAllPlayerHasWon()) {
+        for (let i = 0; i < numberOfPlayers; i++) {
+            dice = 0;
+            if(!checkIfPlayerHasWon(i)){
+                if (!checkIfPlayerHasToBePenalized(i)) {
+                    await play(i);
+                } else {
+                    printRank(i);
+                    continue;
+                }
+            } else {
+                continue;
             }
         }
     }
+
     rl.close()
 }
+
+function checkIfPlayerHasWon(player){
+    return playerScores[player] >= parseInt(MaxPoints);
+}
+
 
 /**
  * check if any player has won the game
  * @returns {boolean}
  */
-function checkIfAnyPlayerHasWon(){
+function checkIfAllPlayerHasWon(){
     let array = playerScores.slice(0),
         n = playerScores.length;
-    sort.quickSort(array, 0, n-1);
-    return !n || array[n-1] < parseInt(MaxPoints);
+    var sum = array.reduce(function (x, y) {
+        return x + y;
+    }, 0);
+    return sum <= numberOfPlayers * MaxPoints ;
 
 }
 
@@ -165,7 +199,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = Math.floor(Math.random() * 6) + 1
+                res = 6;
                 resolve(res);
                 console.log(res);
             } else {
