@@ -45,17 +45,14 @@ winPoint = () => {
  */
 const play = async (i) => {
 
-    if(playerScores[i] >= parseInt(MaxPoints))
+    if(!playerScores[i] || playerScores[i] < parseInt(MaxPoints))
     {
-        //console.log('Player' + (i+1) + 'completes the game');
-
-    } else{
         dice =  await rollDice(i + 1);
         printRank(i);
         if(dice === 6){
             await play(i);
         }
-    }
+}
 }
 
 /**
@@ -200,7 +197,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = 1;
+                res = Math.floor(Math.random() * 6) + 1;
                 resolve(res);
                 console.log(res);
             } else {
