@@ -202,7 +202,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = 1;
+                res = Math.floor(Math.random() * 6) + 1;
                 resolve(res);
                 console.log(res);
             } else {
