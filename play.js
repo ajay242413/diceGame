@@ -47,7 +47,7 @@ const play = async (i) => {
 
     if(playerScores[i] >= parseInt(MaxPoints))
     {
-        console.log('Player' + (i+1) + 'wins');
+        //console.log('Player' + (i+1) + 'completes the game');
 
     } else{
         dice =  await rollDice(i + 1);
@@ -163,6 +163,11 @@ const main = async () => {
             } else {
                 continue;
             }
+            if(playerScores[i] >= parseInt(MaxPoints))
+            {
+                console.log('Player' + (i+1) + 'completes the game');
+
+            }
         }
     }
 
@@ -195,7 +200,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = Math.floor(Math.random() * 6) + 1;
+                res = 1;
                 resolve(res);
                 console.log(res);
             } else {
