@@ -124,7 +124,12 @@ function printRank(player){
             rank = playersRank.indexOf(i) + 1;
         }else {
             rank = (n - 1) - sortedRec.lastIndexOf(playerScores[i]) + 1;
-
+            if(i > 0 && rank - rankTable[i - 1].rank > 1){
+                rank = rank - (i - 1);
+            }
+            if(playerScores[i] === playerScores[i-1]){
+                rank = rankTable[i - 1].rank;
+            }
         }
 
         rankTable.push( {
@@ -197,7 +202,7 @@ rollDice = (player) => {
         rl.question(`player` + player + ` press r to roll a dice :`, r => {
             let res;
             if (r === 'r') {
-                res = Math.floor(Math.random() * 6) + 1;
+                res = 1;
                 resolve(res);
                 console.log(res);
             } else {
