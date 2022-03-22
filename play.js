@@ -178,14 +178,13 @@ function checkIfPlayerHasWon(player){
  * check if any player has won the game
  * @returns {boolean}
  */
-function checkIfAllPlayerHasWon(){
-    let array = playerScores.slice(0),
-        n = playerScores.length;
-    var sum = array.reduce(function (x, y) {
-        return x + y;
-    }, 0);
-    return sum <= numberOfPlayers * MaxPoints ;
-
+function checkIfAllPlayerHasWon() {
+    for (let i = 0; i < numberOfPlayers; i++) {
+        if (!checkIfPlayerHasWon(i)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*
